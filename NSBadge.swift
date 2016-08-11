@@ -14,7 +14,7 @@ extension UIView {
      * Assign badge with only text.
      */
     public func badge(text badgeText: String!) {
-        badge(text: badgeText, badgeEdgeInsets: UIEdgeInsetsMake(20, 0, 0, 15),appearnce: BadgeAppearnce())
+        badge(text: badgeText, badgeEdgeInsets: nil,appearnce: BadgeAppearnce())
     }
     
     /*
@@ -27,7 +27,7 @@ extension UIView {
     /*
      * Assign badge with text,insets, and appearnce.
      */
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets,appearnce:BadgeAppearnce){
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearnce:BadgeAppearnce){
         
         //Create badge label
         var badgeLabel:BadgeLabel!
@@ -95,14 +95,21 @@ extension UIView {
         //calculate center point according to given edge insets
         var vertical: Double?, horizontal: Double?
         
-        vertical = Double(badgeEdgeInsets.top) - Double(badgeEdgeInsets.bottom)
-        horizontal = Double(badgeEdgeInsets.left) - Double(badgeEdgeInsets.right)
+        if (badgeEdgeInsets != nil) {
+            vertical = Double(badgeEdgeInsets.top) - Double(badgeEdgeInsets.bottom)
+            horizontal = Double(badgeEdgeInsets.left) - Double(badgeEdgeInsets.right)
+            
+            let x = (Double(bounds.size.width) - 10 + horizontal!)
+            let y = -(Double(badgeSize.height) / 2) - 10 + vertical!
+            
+            //set the badge frame
+            badgeLabel.frame = CGRect(x: x, y: y, width: width, height: height)
+        }else{
+            let x = self.frame.width - CGFloat((width / 2.0))
+            let y = CGFloat(-(height / 2.0))
+            badgeLabel.frame = CGRect(x: x,y: y,width: CGFloat(width),height: CGFloat(height))
+        }
         
-        let x = (Double(bounds.size.width) - 10 + horizontal!)
-        let y = -(Double(badgeSize.height) / 2) - 10 + vertical!
-        
-        //set the badge frame
-        badgeLabel.frame = CGRect(x: x, y: y, width: width, height: height)
         
         //add to subview
         addSubview(badgeLabel)

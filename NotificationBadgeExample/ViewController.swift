@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        badgeLabel.badge(text: "2", badgeEdgeInsets: UIEdgeInsetsMake(0, 0, 0, 0), appearnce: BadgeAppearnce())
+        badgeLabel.badge(text: "2")
     }
 
     override func didReceiveMemoryWarning() {
