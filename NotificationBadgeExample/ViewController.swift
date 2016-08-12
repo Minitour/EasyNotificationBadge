@@ -19,12 +19,20 @@ class ViewController: UIViewController {
     @IBOutlet var fontSizeStepper: UIStepper!
     @IBOutlet var stepper: UIStepper!
     
+    @IBOutlet weak var barButton: UIBarButtonItem!
     var currentFontSize:CGFloat = 12
     
     @IBAction func fontStepper(_ sender: UIStepper) {
         
         fontPreviewLabel.font = UIFont.systemFont(ofSize: CGFloat(sender.value))
         currentFontSize = CGFloat(sender.value)
+    }
+    
+    var counter = 0
+    
+    @IBAction func menuClick(_ sender: UIBarButtonItem) {
+        counter += 1
+        sender.badge(text: "\(counter)")
     }
     
     
@@ -56,6 +64,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         badgeLabel.badge(text: "2")
+        //barButton.badge(text: "!")
     }
 
     override func didReceiveMemoryWarning() {

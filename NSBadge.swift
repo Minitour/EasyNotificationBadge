@@ -117,6 +117,37 @@ extension UIView {
     
 }
 
+
+extension UIBarButtonItem {
+    
+    /*
+     * Assign badge with only text.
+     */
+    public func badge(text badgeText: String!) {
+        getView().badge(text: badgeText, badgeEdgeInsets: nil,appearnce: BadgeAppearnce())
+    }
+    
+    /*
+     * Assign badge with text and edge insets.
+     */
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
+        getView().badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
+    }
+    
+    /*
+     * Assign badge with text,insets, and appearnce.
+     */
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearnce:BadgeAppearnce){
+        getView().badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: appearnce)
+    }
+    
+    private func getView()->UIView{
+        return value(forKey: "view") as! UIView
+    }
+    
+}
+
+
 /*
  * BadgeLabel - This class is made to avoid confusion with other subviews that might be of type UILabel.
  */

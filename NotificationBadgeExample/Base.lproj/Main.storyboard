@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h98-Qd-FxG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
@@ -83,9 +83,17 @@
                             <constraint firstItem="KJu-wg-nKR" firstAttribute="leading" secondItem="Lch-9c-guE" secondAttribute="trailing" constant="8" symbolic="YES" id="zrW-Pz-JRp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aIG-dU-jam">
+                        <barButtonItem key="leftBarButtonItem" title="Feed" id="zVL-Nh-TNE">
+                            <connections>
+                                <action selector="menuClick:" destination="BYZ-38-t0r" id="p32-eQ-F1l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="badgeLabel" destination="tC9-4p-cfg" id="kG1-lr-dwn"/>
                         <outlet property="badgeTextChanger" destination="x0a-Kf-OEg" id="908-ER-cBM"/>
+                        <outlet property="barButton" destination="zVL-Nh-TNE" id="n8c-DG-sYM"/>
                         <outlet property="blueSlider" destination="267-15-ioq" id="heh-tG-wpH"/>
                         <outlet property="fontPreviewLabel" destination="KJu-wg-nKR" id="0PP-pm-3KD"/>
                         <outlet property="fontSizeStepper" destination="Lch-9c-guE" id="Il9-LM-Vcb"/>
@@ -95,6 +103,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="137.18140929535232"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yDm-YU-3zM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h98-Qd-FxG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IXU-MP-grN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hlm-q7-dlg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yA8-v0-7W0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
