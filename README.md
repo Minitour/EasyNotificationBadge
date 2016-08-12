@@ -19,7 +19,7 @@ Simply drag and drop ```NSBadge.swift``` to your project.
 
 ##Usage
 
-To add a badge with default settings use this:
+To add a badge with default settings use this (This also applies to updating an existing badge):
 ```swift
 view.badge(text: "5")
 ```
