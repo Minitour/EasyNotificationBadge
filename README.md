@@ -10,7 +10,8 @@ The code that was used in this extension was originally written by [mustafaibrah
 
 <img src="Screenshots/ss3.png"  height="50" /> 
 
-<img src="Screenshots/ss4.png"  height="400" /> 
+<img src="Screenshots/ss5.png"  height="50" />
+
 
 ##Installation
 
@@ -22,10 +23,18 @@ To add a badge with default settings use this:
 ```swift
 view.badge(text: "5")
 ```
+```swift
+barButtonItem.badge(text: "7")
+```
+
 To remove the badge:
 
 ```swift
 view.badge(text: nil)
+```
+
+```swift
+barButtonItem.badge(text: nil)
 ```
 
 ##Advanced Usage
