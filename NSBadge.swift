@@ -82,9 +82,6 @@ extension UIView {
         //set text color
         badgeLabel.textColor = appearnce.textColor
         
-        //corner radius
-        badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
-        
         //get current badge size
         let badgeSize = badgeLabel.frame.size
         
@@ -113,6 +110,9 @@ extension UIView {
         
         //add to subview
         addSubview(badgeLabel)
+        
+        //corner radius
+        badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
     }
     
 }

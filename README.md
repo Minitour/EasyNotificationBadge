@@ -4,14 +4,7 @@ UIView extension that adds a notification badge.
 The code that was used in this extension was originally written by [mustafaibrahim989](https://github.com/mustafaibrahim989) in the library [MIBadgeButton-Swift](https://github.com/mustafaibrahim989/MIBadgeButton-Swift).
 
 ##Screenshots
-<img src="Screenshots/ss1.png"  height="50" />
-
-<img src="Screenshots/ss2.png"  height="50" />
-
-<img src="Screenshots/ss3.png"  height="50" /> 
-
-<img src="Screenshots/ss5.png"  height="50" />
-
+<img src="Screenshots/ss6.png"  height="400" />
 
 ##Installation
 
