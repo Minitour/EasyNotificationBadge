@@ -32,6 +32,8 @@ extension UIView {
         //Create badge label
         var badgeLabel:BadgeLabel!
         
+        var doesBadgeExist = false
+        
         //Find badge in subviews if exists
         for view in self.subviews {
             if view.tag == 1 && view is BadgeLabel{
@@ -42,11 +44,18 @@ extension UIView {
         //If assigned text is nil (request to remove badge) and badge label is not nil:
         if badgeText == nil && !(badgeLabel == nil){
             
-            //Remove badge label from superview and return.
-            UIView.animate(withDuration: 0.2, animations: {badgeLabel.alpha = 0.0},
-                                       completion: {(value: Bool) in
-                                        badgeLabel.removeFromSuperview()
-            })
+            if appearnce.animate{
+                UIView.animate(withDuration: appearnce.duration, animations: {
+                    badgeLabel.alpha = 0.0
+                    badgeLabel.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    
+                    }, completion: { (Bool) in
+                        
+                        badgeLabel.removeFromSuperview()
+                })
+            }else{
+                badgeLabel.removeFromSuperview()
+            }
             return
         }else if badgeText == nil && badgeLabel == nil {
             return
@@ -60,6 +69,8 @@ extension UIView {
             
             //assign tag to badge label
             badgeLabel.tag = 1
+        }else{
+            doesBadgeExist = true
         }
         
         //Clip to bounds
@@ -113,6 +124,18 @@ extension UIView {
         
         //corner radius
         badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
+        
+        if !doesBadgeExist {
+            
+            if appearnce.animate {
+                UIView.animate(withDuration: appearnce.duration/2, animations: { () -> Void in
+                    badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
+                }) { (finished: Bool) -> Void in
+                    UIView.animate(withDuration: appearnce.duration/2, animations: { () -> Void in
+                        badgeLabel.transform = CGAffineTransform.identity
+                    })}
+            }
+        }
     }
     
 }
@@ -161,6 +184,8 @@ public struct BadgeAppearnce {
     var alignment:NSTextAlignment = .center
     var backgroundColor = UIColor.red
     var textColor = UIColor.white
+    var animate = true
+    var duration = 0.2
     
 }
 
