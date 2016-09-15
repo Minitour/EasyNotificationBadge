@@ -17,9 +17,16 @@ extension UIView {
         badge(text: badgeText, badgeEdgeInsets: nil,appearnce: BadgeAppearnce())
     }
     
+    
+    public func badge(text badgeText: String!, appearnce:BadgeAppearnce){
+        
+    }
+    
     /*
      * Assign badge with text and edge insets.
      */
+    
+    @available(*, deprecated, message: "use shareWithPars: instead")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
     }
@@ -27,7 +34,7 @@ extension UIView {
     /*
      * Assign badge with text,insets, and appearnce.
      */
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearnce:BadgeAppearnce){
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets?,appearnce:BadgeAppearnce){
         
         //Create badge label
         var badgeLabel:BadgeLabel!
@@ -85,7 +92,7 @@ extension UIView {
         badgeLabel.sizeToFit()
         
         //set the allignment
-        badgeLabel.textAlignment = appearnce.alignment
+        badgeLabel.textAlignment = appearnce.textAlignment
         
         //set background color
         badgeLabel.backgroundColor = appearnce.backgroundColor
@@ -97,36 +104,49 @@ extension UIView {
         let badgeSize = badgeLabel.frame.size
         
         //calculate width and height with minimum height and width of 20
-        let height = max(20, Double(badgeSize.height) + 5.0)
+        let height = max(18, Double(badgeSize.height) + 5.0)
         let width = max(height, Double(badgeSize.width) + 10.0)
         
-        //calculate center point according to given edge insets
-        var vertical: Double?, horizontal: Double?
-        
-        if (badgeEdgeInsets != nil) {
-            vertical = Double(badgeEdgeInsets.top) - Double(badgeEdgeInsets.bottom)
-            horizontal = Double(badgeEdgeInsets.left) - Double(badgeEdgeInsets.right)
-            
-            let x = (Double(bounds.size.width) - 10 + horizontal!)
-            let y = -(Double(badgeSize.height) / 2) - 10 + vertical!
-            
-            //set the badge frame
-            badgeLabel.frame = CGRect(x: x, y: y, width: width, height: height)
-        }else{
-            let x = self.frame.width - CGFloat((width / 2.0))
-            let y = CGFloat(-(height / 2.0))
-            badgeLabel.frame = CGRect(x: x,y: y,width: CGFloat(width),height: CGFloat(height))
-        }
+        badgeLabel.frame.size = CGSize(width: width, height: height)
         
         
         //add to subview
+        
+        if doesBadgeExist {
+            //remove view to delete constraints
+            badgeLabel.removeFromSuperview()
+        }
         addSubview(badgeLabel)
+        
+        //The distance from the center of the view (vertically)
+        let centerY = appearnce.distenceFromCenterY == 0 ? -(bounds.size.height / 2) : appearnce.distenceFromCenterY
+        
+        //The distance from the center of the view (horizontally)
+        let centerX = appearnce.distenceFromCenterX == 0 ? (bounds.size.width / 2) : appearnce.distenceFromCenterX
+        
+        //disable auto resizing mask
+        badgeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        //add height constraint
+        self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(height)))
+        
+        //add width constraint
+        self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(width)))
+        
+        //add vertical constraint
+        self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: centerX))
+        
+        //add horizontal constraint
+        self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: centerY))
+        
         
         //corner radius
         badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
         
+        //badge does not exist, meaning we are adding a new one
         if !doesBadgeExist {
             
+            //should it animate?
             if appearnce.animate {
                 UIView.animate(withDuration: appearnce.duration/2, animations: { () -> Void in
                     badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -181,11 +201,17 @@ class BadgeLabel:UILabel{}
  */
 public struct BadgeAppearnce {
     var textSize:CGFloat = 12
-    var alignment:NSTextAlignment = .center
+    var textAlignment:NSTextAlignment = .center
     var backgroundColor = UIColor.red
     var textColor = UIColor.white
     var animate = true
     var duration = 0.2
+    var distenceFromCenterY:CGFloat = 0
+    var distenceFromCenterX:CGFloat = 0
+    
+}
+
+enum BadgeLocation{
     
 }
 
