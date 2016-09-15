@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         appearnce.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
         appearnce.textSize = currentFontSize
         
-        badgeLabel.badge(text: text, badgeEdgeInsets: nil, appearnce: appearnce)
+        badgeLabel.badge(text: text, appearnce: appearnce)
         
         
         

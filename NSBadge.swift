@@ -13,20 +13,24 @@ extension UIView {
     /*
      * Assign badge with only text.
      */
+    
+    
+    /// - parameter text: The badge value, use nil to remove exsiting badge.
     public func badge(text badgeText: String!) {
-        badge(text: badgeText, badgeEdgeInsets: nil,appearnce: BadgeAppearnce())
+        badge(text: badgeText,appearnce: BadgeAppearnce())
     }
     
-    
+    /// - parameter text: The badge value, use nil to remove exsiting badge.
+    /// - parameter appearnce: The appearance of the badge.
     public func badge(text badgeText: String!, appearnce:BadgeAppearnce){
-        
+        badge(text: badgeText, badgeEdgeInsets: nil,appearnce: appearnce)
     }
     
     /*
      * Assign badge with text and edge insets.
      */
     
-    @available(*, deprecated, message: "use shareWithPars: instead")
+    @available(*, deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
     }
@@ -167,12 +171,18 @@ extension UIBarButtonItem {
      * Assign badge with only text.
      */
     public func badge(text badgeText: String!) {
-        getView().badge(text: badgeText, badgeEdgeInsets: nil,appearnce: BadgeAppearnce())
+        getView().badge(text: badgeText ,appearnce: BadgeAppearnce())
+    }
+    
+    
+    public func badge(text badgeText: String!, appearnce:BadgeAppearnce){
+        getView().badge(text: badgeText, appearnce: appearnce)
     }
     
     /*
      * Assign badge with text and edge insets.
      */
+    @available(*,deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         getView().badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
     }
@@ -180,6 +190,7 @@ extension UIBarButtonItem {
     /*
      * Assign badge with text,insets, and appearnce.
      */
+    @available(*,deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearnce:BadgeAppearnce){
         getView().badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: appearnce)
     }
@@ -208,10 +219,6 @@ public struct BadgeAppearnce {
     var duration = 0.2
     var distenceFromCenterY:CGFloat = 0
     var distenceFromCenterX:CGFloat = 0
-    
-}
-
-enum BadgeLocation{
     
 }
 
