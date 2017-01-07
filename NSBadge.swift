@@ -211,14 +211,25 @@ class BadgeLabel:UILabel{}
  * BadgeAppearnce - This struct is used to design the badge.
  */
 public struct BadgeAppearnce {
-    var textSize:CGFloat = 12
-    var textAlignment:NSTextAlignment = .center
-    var backgroundColor = UIColor.red
-    var textColor = UIColor.white
-    var animate = true
-    var duration = 0.2
-    var distenceFromCenterY:CGFloat = 0
-    var distenceFromCenterX:CGFloat = 0
+    public var textSize: CGFloat
+    public var textAlignment: NSTextAlignment
+    public var backgroundColor: UIColor
+    public var textColor: UIColor
+    public var animate: Bool
+    public var duration: TimeInterval
+    public var distenceFromCenterY:CGFloat
+    public var distenceFromCenterX:CGFloat
+    
+    public init() {
+        textSize = 12
+        textAlignment = .center
+        backgroundColor = .red
+        textColor = .white
+        animate = true
+        duration = 0.2
+        distenceFromCenterY = 0
+        distenceFromCenterX = 0
+    }
     
 }
 
