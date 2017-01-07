@@ -8,7 +8,12 @@ The code that was used in this extension was originally written by [mustafaibrah
 
 ##Installation
 
-Simply drag and drop ```NSBadge.swift``` to your project.
+
+```bash
+pod 'EasyNotificationBadge'
+```
+
+Or simply drag and drop ```NSBadge.swift``` to your project.
 
 ##Usage
 
