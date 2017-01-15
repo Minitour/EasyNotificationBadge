@@ -44,8 +44,11 @@ class ViewController: UIViewController {
             text = badgeTextChanger.text
         }
         var appearnce = BadgeAppearnce()
+        //appearnce.allowShadow = true
+        appearnce.borderColor = .white
+        appearnce.borderWidth = 1
+        appearnce.textSize = CGFloat(stepper.value)
         appearnce.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
-        appearnce.textSize = currentFontSize
         
         badgeLabel.badge(text: text, appearnce: appearnce)
         

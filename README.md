@@ -43,5 +43,8 @@ appearnce.backgroundColor = UIColor.blue //default is red
 appearnce.textColor = UIColor.white // default is white
 appearnce.alignment = .center //default is center
 appearnce.textSize = 15 //default is 12
-view.badge(text: "Your text",badgeEdgeInsets: UIEdgeInsetsMake(20, 0, 0, 15),appearnce: badgeAppearnce)
+appearnce.allowShadow = true
+appearnce.borderColor = .blue
+appearnce.borderWidth = 1
+view.badge(text: "Your text", appearnce: badgeAppearnce)
 ```
