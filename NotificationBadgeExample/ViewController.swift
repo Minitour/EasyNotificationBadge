@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var barButton: UIBarButtonItem!
     var currentFontSize:CGFloat = 12
     
+    lazy var rightItem: UIBarButtonItem = UIBarButtonItem(title: "Test", style: .plain, target: nil, action: nil)
+    
     @IBAction func fontStepper(_ sender: UIStepper) {
         
         fontPreviewLabel.font = UIFont.systemFont(ofSize: CGFloat(sender.value))
@@ -45,9 +47,10 @@ class ViewController: UIViewController {
         }
         var appearnce = BadgeAppearnce()
         //appearnce.allowShadow = true
-        appearnce.borderColor = .white
-        appearnce.borderWidth = 1
-        appearnce.textSize = CGFloat(stepper.value)
+        //appearnce.borderColor = .white
+        //appearnce.borderWidth = 1
+        //appearnce.textSize = CGFloat(stepper.value)
+        appearnce.allowShadow = true
         appearnce.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
         
         badgeLabel.badge(text: text, appearnce: appearnce)
@@ -61,6 +64,9 @@ class ViewController: UIViewController {
         
         stepper.maximumValue = 30
         stepper.minimumValue = 5
+        //badgeLabel.badge(text: "test")
+        //self.rightItem.badge(text: "lol")
+        self.navigationItem.rightBarButtonItem = self.rightItem
         // Do any additional setup after loading the view, typically from a nib.
         
         
@@ -68,7 +74,9 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        badgeLabel.badge(text: "2")
+        //badgeLabel.badge(text: "2")
+        barButton.badge(text: "10")
+        self.rightItem.badge(text: "lol")
         //barButton.badge(text: "!")
     }
 
