@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     lazy var rightItem: UIBarButtonItem = UIBarButtonItem(title: "Test", style: .plain, target: nil, action: nil)
 
     @IBAction func fontStepper(_ sender: UIStepper) {
-
         fontPreviewLabel.font = UIFont.systemFont(ofSize: CGFloat(sender.value))
         currentFontSize = CGFloat(sender.value)
     }
@@ -45,12 +44,8 @@ class ViewController: UIViewController {
             text = badgeTextChanger.text
         }
         var appearance = BadgeAppearance()
-        //appearance.allowShadow = true
-        //appearance.borderColor = .white
-        //appearance.borderWidth = 1
-        //appearance.textSize = CGFloat(stepper.value)
         appearance.allowShadow = true
-        appearance.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
+        appearance.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
 
         badgeLabel.badge(text: text, appearance: appearance)
 
@@ -61,25 +56,14 @@ class ViewController: UIViewController {
 
         stepper.maximumValue = 30
         stepper.minimumValue = 5
-        //badgeLabel.badge(text: "test")
-        //self.rightItem.badge(text: "lol")
-        self.navigationItem.rightBarButtonItem = self.rightItem
-        // Do any additional setup after loading the view, typically from a nib.
 
+        self.navigationItem.rightBarButtonItem = self.rightItem
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //badgeLabel.badge(text: "2")
         barButton.badge(text: "10")
-        self.rightItem.badge(text: "lol")
-        //barButton.badge(text: "!")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-        // Dispose of any resources that can be recreated.
+        self.rightItem.badge(text: "!")
     }
 
 }

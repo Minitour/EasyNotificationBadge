@@ -138,7 +138,6 @@ extension UIView {
         self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: centerY))
 
         badgeLabel.layer.borderColor = appearance.borderColor.cgColor
-
         badgeLabel.layer.borderWidth = appearance.borderWidth
 
         //corner radius
@@ -147,17 +146,13 @@ extension UIView {
         //setup shadow
         if appearance.allowShadow {
             badgeLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-
             badgeLabel.layer.shadowRadius = 1
-
             badgeLabel.layer.shadowOpacity = 0.5
-
             badgeLabel.layer.shadowColor = UIColor.black.cgColor
         }
 
         //badge does not exist, meaning we are adding a new one
         if !doesBadgeExist {
-
             //should it animate?
             if appearance.animate {
                 badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -170,13 +165,6 @@ extension UIView {
                                badgeLabel.transform = .identity
                 },
                                completion: nil)
-
-                //UIView.animate(withDuration: appearance.duration/2, animations: { () -> Void in
-                //    badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
-                //}) { (finished: Bool) -> Void in
-                //    UIView.animate(withDuration: appearance.duration/2, animations: { () -> Void in
-                //        badgeLabel.transform = CGAffineTransform.identity
-                //    })}
             }
         }
     }
