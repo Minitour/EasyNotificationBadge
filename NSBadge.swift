@@ -17,28 +17,28 @@ extension UIView {
     
     /// - parameter text: The badge value, use nil to remove exsiting badge.
     public func badge(text badgeText: String!) {
-        badge(text: badgeText,appearnce: BadgeAppearnce())
+        badge(text: badgeText,appearance: BadgeAppearance())
     }
     
     /// - parameter text: The badge value, use nil to remove exsiting badge.
-    /// - parameter appearnce: The appearance of the badge.
-    public func badge(text badgeText: String!, appearnce:BadgeAppearnce){
-        badge(text: badgeText, badgeEdgeInsets: nil,appearnce: appearnce)
+    /// - parameter appearance: The appearance of the badge.
+    public func badge(text badgeText: String!, appearance:BadgeAppearance){
+        badge(text: badgeText, badgeEdgeInsets: nil,appearance: appearance)
     }
     
     /*
      * Assign badge with text and edge insets.
      */
     
-    @available(*, deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
+    @available(*, deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
-        badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
+        badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
     }
     
     /*
-     * Assign badge with text,insets, and appearnce.
+     * Assign badge with text,insets, and appearance.
      */
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets?,appearnce:BadgeAppearnce){
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets?,appearance:BadgeAppearance){
         
         //Create badge label
         var badgeLabel:BadgeLabel!
@@ -55,8 +55,8 @@ extension UIView {
         //If assigned text is nil (request to remove badge) and badge label is not nil:
         if badgeText == nil && !(badgeLabel == nil){
             
-            if appearnce.animate{
-                UIView.animate(withDuration: appearnce.duration, animations: {
+            if appearance.animate{
+                UIView.animate(withDuration: appearance.duration, animations: {
                     badgeLabel.alpha = 0.0
                     badgeLabel.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                     
@@ -88,18 +88,18 @@ extension UIView {
         badgeLabel.text = badgeText
         
         //Set font size
-        badgeLabel.font = UIFont.systemFont(ofSize: appearnce.textSize)
+        badgeLabel.font = UIFont.systemFont(ofSize: appearance.textSize)
         
         badgeLabel.sizeToFit()
         
         //set the allignment
-        badgeLabel.textAlignment = appearnce.textAlignment
+        badgeLabel.textAlignment = appearance.textAlignment
         
         //set background color
-        badgeLabel.layer.backgroundColor = appearnce.backgroundColor.cgColor
+        badgeLabel.layer.backgroundColor = appearance.backgroundColor.cgColor
         
         //set text color
-        badgeLabel.textColor = appearnce.textColor
+        badgeLabel.textColor = appearance.textColor
         
         
         
@@ -124,10 +124,10 @@ extension UIView {
         
         
         //The distance from the center of the view (vertically)
-        let centerY = appearnce.distenceFromCenterY == 0 ? -(bounds.size.height / 2) : appearnce.distenceFromCenterY
+        let centerY = appearance.distenceFromCenterY == 0 ? -(bounds.size.height / 2) : appearance.distenceFromCenterY
         
         //The distance from the center of the view (horizontally)
-        let centerX = appearnce.distenceFromCenterX == 0 ? (bounds.size.width / 2) : appearnce.distenceFromCenterX
+        let centerX = appearance.distenceFromCenterX == 0 ? (bounds.size.width / 2) : appearance.distenceFromCenterX
         
         //disable auto resizing mask
         badgeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -144,9 +144,9 @@ extension UIView {
         //add horizontal constraint
         self.addConstraint(NSLayoutConstraint(item: badgeLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: centerY))
         
-        badgeLabel.layer.borderColor = appearnce.borderColor.cgColor
+        badgeLabel.layer.borderColor = appearance.borderColor.cgColor
         
-        badgeLabel.layer.borderWidth = appearnce.borderWidth
+        badgeLabel.layer.borderWidth = appearance.borderWidth
         
         
         
@@ -154,7 +154,7 @@ extension UIView {
         badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
         
         //setup shadow
-        if appearnce.allowShadow {
+        if appearance.allowShadow {
             badgeLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
             
             badgeLabel.layer.shadowRadius = 1
@@ -171,9 +171,9 @@ extension UIView {
         if !doesBadgeExist {
             
             //should it animate?
-            if appearnce.animate {
+            if appearance.animate {
                 badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
-                UIView.animate(withDuration: appearnce.duration,
+                UIView.animate(withDuration: appearance.duration,
                                delay: 0,
                                usingSpringWithDamping: 0.5,
                                initialSpringVelocity: 0.5,
@@ -183,10 +183,10 @@ extension UIView {
                 },
                                completion: nil)
                 
-                //UIView.animate(withDuration: appearnce.duration/2, animations: { () -> Void in
+                //UIView.animate(withDuration: appearance.duration/2, animations: { () -> Void in
                 //    badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
                 //}) { (finished: Bool) -> Void in
-                //    UIView.animate(withDuration: appearnce.duration/2, animations: { () -> Void in
+                //    UIView.animate(withDuration: appearance.duration/2, animations: { () -> Void in
                 //        badgeLabel.transform = CGAffineTransform.identity
                 //    })}
             }
@@ -203,16 +203,16 @@ extension UIBarButtonItem {
      */
     public func badge(text badgeText: String!) {
         if let view = getView(){
-            view.badge(text: badgeText ,appearnce: BadgeAppearnce())
+            view.badge(text: badgeText ,appearance: BadgeAppearance())
         }else{
             NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
         }
     }
     
     
-    public func badge(text badgeText: String!, appearnce:BadgeAppearnce){
+    public func badge(text badgeText: String!, appearance:BadgeAppearance){
         if let view = getView(){
-            view.badge(text: badgeText, appearnce: appearnce)
+            view.badge(text: badgeText, appearance: appearance)
         }else{
             NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
         }
@@ -221,10 +221,10 @@ extension UIBarButtonItem {
     /*
      * Assign badge with text and edge insets.
      */
-    @available(*,deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
+    @available(*,deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
     public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         if let view = getView(){
-            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: BadgeAppearnce())
+            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
         }else{
             NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
         }
@@ -232,12 +232,12 @@ extension UIBarButtonItem {
     }
     
     /*
-     * Assign badge with text,insets, and appearnce.
+     * Assign badge with text,insets, and appearance.
      */
-    @available(*,deprecated, message: "Use badge(text: String!, appearnce:BadgeAppearnce)")
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearnce:BadgeAppearnce){
+    @available(*,deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
+    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets!,appearance:BadgeAppearance){
         if let view = getView(){
-            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearnce: appearnce)
+            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: appearance)
         }else{
             NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
         }
@@ -256,9 +256,9 @@ extension UIBarButtonItem {
 class BadgeLabel:UILabel{}
 
 /*
- * BadgeAppearnce - This struct is used to design the badge.
+ * BadgeAppearance - This struct is used to design the badge.
  */
-public struct BadgeAppearnce {
+public struct BadgeAppearance {
     public var textSize: CGFloat
     public var textAlignment: NSTextAlignment
     public var borderColor: UIColor

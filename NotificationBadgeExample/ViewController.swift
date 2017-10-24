@@ -45,15 +45,15 @@ class ViewController: UIViewController {
         }else{
             text = badgeTextChanger.text
         }
-        var appearnce = BadgeAppearnce()
-        //appearnce.allowShadow = true
-        //appearnce.borderColor = .white
-        //appearnce.borderWidth = 1
-        //appearnce.textSize = CGFloat(stepper.value)
-        appearnce.allowShadow = true
-        appearnce.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
+        var appearance = BadgeAppearance()
+        //appearance.allowShadow = true
+        //appearance.borderColor = .white
+        //appearance.borderWidth = 1
+        //appearance.textSize = CGFloat(stepper.value)
+        appearance.allowShadow = true
+        appearance.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
         
-        badgeLabel.badge(text: text, appearnce: appearnce)
+        badgeLabel.badge(text: text, appearance: appearance)
         
         
         
