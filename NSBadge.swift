@@ -16,7 +16,7 @@ extension UIView {
     
     
     /// - parameter text: The badge value, use nil to remove exsiting badge.
-    public func badge(text badgeText: String!) {
+    @objc public func badge(text badgeText: String!) {
         badge(text: badgeText,appearance: BadgeAppearance())
     }
     
@@ -31,7 +31,7 @@ extension UIView {
      */
     
     @available(*, deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
+    @objc public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
     }
     
@@ -201,7 +201,7 @@ extension UIBarButtonItem {
     /*
      * Assign badge with only text.
      */
-    public func badge(text badgeText: String!) {
+    @objc public func badge(text badgeText: String!) {
         if let view = getView(){
             view.badge(text: badgeText ,appearance: BadgeAppearance())
         }else{
@@ -222,7 +222,7 @@ extension UIBarButtonItem {
      * Assign badge with text and edge insets.
      */
     @available(*,deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
-    public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
+    @objc public func badge(text badgeText:String!,badgeEdgeInsets:UIEdgeInsets){
         if let view = getView(){
             view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
         }else{
@@ -253,7 +253,7 @@ extension UIBarButtonItem {
 /*
  * BadgeLabel - This class is made to avoid confusion with other subviews that might be of type UILabel.
  */
-class BadgeLabel:UILabel{}
+@objc class BadgeLabel:UILabel{}
 
 /*
  * BadgeAppearance - This struct is used to design the badge.
