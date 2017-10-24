@@ -18,74 +18,52 @@ class ViewController: UIViewController {
     @IBOutlet var fontPreviewLabel: UILabel!
     @IBOutlet var fontSizeStepper: UIStepper!
     @IBOutlet var stepper: UIStepper!
-    
+
     @IBOutlet weak var barButton: UIBarButtonItem!
-    var currentFontSize:CGFloat = 12
-    
+    var currentFontSize: CGFloat = 12
+
     lazy var rightItem: UIBarButtonItem = UIBarButtonItem(title: "Test", style: .plain, target: nil, action: nil)
-    
+
     @IBAction func fontStepper(_ sender: UIStepper) {
-        
         fontPreviewLabel.font = UIFont.systemFont(ofSize: CGFloat(sender.value))
         currentFontSize = CGFloat(sender.value)
     }
-    
+
     var counter = 0
-    
+
     @IBAction func menuClick(_ sender: UIBarButtonItem) {
         counter += 1
         sender.badge(text: "\(counter)")
     }
-    
-    
+
     @IBAction func update(_ sender: AnyObject) {
-        var text:String?
+        var text: String?
         if badgeTextChanger.text?.characters.count == 0 {
             text = nil
-        }else{
+        } else {
             text = badgeTextChanger.text
         }
-        var appearnce = BadgeAppearnce()
-        //appearnce.allowShadow = true
-        //appearnce.borderColor = .white
-        //appearnce.borderWidth = 1
-        //appearnce.textSize = CGFloat(stepper.value)
-        appearnce.allowShadow = true
-        appearnce.backgroundColor = UIColor(colorLiteralRed: redSlider.value, green: greenSlider.value, blue: blueSlider.value, alpha: 1)
-        
-        badgeLabel.badge(text: text, appearnce: appearnce)
-        
-        
-        
+        var appearance = BadgeAppearance()
+        appearance.allowShadow = true
+        appearance.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+
+        badgeLabel.badge(text: text, appearance: appearance)
+
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         stepper.maximumValue = 30
         stepper.minimumValue = 5
-        //badgeLabel.badge(text: "test")
-        //self.rightItem.badge(text: "lol")
+
         self.navigationItem.rightBarButtonItem = self.rightItem
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //badgeLabel.badge(text: "2")
         barButton.badge(text: "10")
-        self.rightItem.badge(text: "lol")
-        //barButton.badge(text: "!")
+        self.rightItem.badge(text: "!")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
-
