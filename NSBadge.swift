@@ -117,10 +117,10 @@ extension UIView {
         self.addSubview(badgeLabel)
 
         //The distance from the center of the view (vertically)
-        let centerY = appearance.distenceFromCenterY == 0 ? -(bounds.size.height / 2) : appearance.distenceFromCenterY
+        let centerY = appearance.distanceFromCenterY == 0 ? -(bounds.size.height / 2) : appearance.distanceFromCenterY
 
         //The distance from the center of the view (horizontally)
-        let centerX = appearance.distenceFromCenterX == 0 ? (bounds.size.width / 2) : appearance.distenceFromCenterX
+        let centerX = appearance.distanceFromCenterX == 0 ? (bounds.size.width / 2) : appearance.distanceFromCenterX
 
         //disable auto resizing mask
         badgeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -241,8 +241,8 @@ public struct BadgeAppearance {
     public var textColor: UIColor
     public var animate: Bool
     public var duration: TimeInterval
-    public var distenceFromCenterY: CGFloat
-    public var distenceFromCenterX: CGFloat
+    public var distanceFromCenterY: CGFloat
+    public var distanceFromCenterX: CGFloat
 
     public init() {
         textSize = 12
@@ -254,8 +254,8 @@ public struct BadgeAppearance {
         borderColor = .clear
         borderWidth = 0
         allowShadow = false
-        distenceFromCenterY = 0
-        distenceFromCenterX = 0
+        distanceFromCenterY = 0
+        distanceFromCenterX = 0
     }
 
 }
