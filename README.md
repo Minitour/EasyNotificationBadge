@@ -38,10 +38,10 @@ barButtonItem.badge(text: nil)
 ## Advanced Usage
 
 ```swift
-let badgeAppearnce = BadgeAppearnce()
+var badgeAppearnce = BadgeAppearnce()
 badgeAppearnce.backgroundColor = UIColor.blue //default is red
 badgeAppearnce.textColor = UIColor.white // default is white
-badgeAppearnce.alignment = .center //default is center
+badgeAppearnce.textAlignment = .center //default is center
 badgeAppearnce.textSize = 15 //default is 12
 badgeAppearnce.distenceFromCenterX = 15 //default is 0
 badgeAppearnce.distenceFromCenterY = -10 //default is 0
