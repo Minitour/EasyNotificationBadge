@@ -39,15 +39,15 @@ barButtonItem.badge(text: nil)
 
 ```swift
 let badgeAppearnce = BadgeAppearnce()
-appearnce.backgroundColor = UIColor.blue //default is red
-appearnce.textColor = UIColor.white // default is white
-appearnce.alignment = .center //default is center
-appearnce.textSize = 15 //default is 12
-appearnce.distenceFromCenterX = 15 //default is 0
-appearnce.distenceFromCenterY = -10 //default is 0
-appearnce.allowShadow = true
-appearnce.borderColor = .blue
-appearnce.borderWidth = 1
+badgeAppearnce.backgroundColor = UIColor.blue //default is red
+badgeAppearnce.textColor = UIColor.white // default is white
+badgeAppearnce.alignment = .center //default is center
+badgeAppearnce.textSize = 15 //default is 12
+badgeAppearnce.distenceFromCenterX = 15 //default is 0
+badgeAppearnce.distenceFromCenterY = -10 //default is 0
+badgeAppearnce.allowShadow = true
+badgeAppearnce.borderColor = .blue
+badgeAppearnce.borderWidth = 1
 view.badge(text: "Your text", appearnce: badgeAppearnce)
 ```
 
