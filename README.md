@@ -1,6 +1,10 @@
 
 <img src="Screenshots/heading.gif"  height="100" />
 
+[![CocoaPods](https://img.shields.io/cocoapods/v/EasyNotificationBadge.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/l/EasyNotificationBadge.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/p/EasyNotificationBadge.svg)]()
+
 ## Installation
 
 
