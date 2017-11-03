@@ -9,61 +9,43 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet var badgeLabel: UILabel!
-    @IBOutlet var redSlider: UISlider!
-    @IBOutlet var greenSlider: UISlider!
-    @IBOutlet var blueSlider: UISlider!
-    @IBOutlet var badgeTextChanger: UITextField!
-    @IBOutlet var fontPreviewLabel: UILabel!
-    @IBOutlet var fontSizeStepper: UIStepper!
-    @IBOutlet var stepper: UIStepper!
-
-    @IBOutlet weak var barButton: UIBarButtonItem!
-    var currentFontSize: CGFloat = 12
-
-    lazy var rightItem: UIBarButtonItem = UIBarButtonItem(title: "Test", style: .plain, target: nil, action: nil)
-
-    @IBAction func fontStepper(_ sender: UIStepper) {
-        fontPreviewLabel.font = UIFont.systemFont(ofSize: CGFloat(sender.value))
-        currentFontSize = CGFloat(sender.value)
-    }
-
-    var counter = 0
-
-    @IBAction func menuClick(_ sender: UIBarButtonItem) {
-        counter += 1
-        sender.badge(text: "\(counter)")
-    }
-
-    @IBAction func update(_ sender: AnyObject) {
-        var text: String?
-        if badgeTextChanger.text?.characters.count == 0 {
-            text = nil
-        } else {
-            text = badgeTextChanger.text
-        }
-        var appearance = BadgeAppearance()
-        appearance.allowShadow = true
-        appearance.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
-
-        badgeLabel.badge(text: text, appearance: appearance)
-
-    }
-
+    @IBOutlet weak var badgeButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.badgeButton.badge(text: "1")
+        }
 
-        stepper.maximumValue = 30
-        stepper.minimumValue = 5
-
-        self.navigationItem.rightBarButtonItem = self.rightItem
+        badgeButton.addTarget(self, action: #selector(didSelectButton(sender:)), for: .touchUpInside)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        barButton.badge(text: "10")
-        self.rightItem.badge(text: "!")
+    @objc
+    func didSelectButton(sender: UIButton) {
+
+        sender.badge(text: "Easy")
+//        let rndStr = String.random()
+//        let str: String? = rndStr.characters.count == 0 ? nil : rndStr
+//        sender.badge(text: str)
+    }
+}
+
+extension String {
+
+
+    static func random(withLengthUpTo maxLength: Int = 10)-> String{
+        let len = Int(arc4random_uniform(UInt32(maxLength)))
+        return random(length: len)
     }
 
+    static func random(length: Int) -> String {
+        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString: String = ""
+
+        for _ in 0..<length {
+            let randomValue = arc4random_uniform(UInt32(base.characters.count))
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+        }
+        return randomString
+    }
 }

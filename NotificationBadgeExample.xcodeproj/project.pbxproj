@@ -99,7 +99,7 @@
 				TargetAttributes = {
 					4F6C9B391D5C641D000098B8 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = Y759RK5K7D;
+						DevelopmentTeam = 35DWKWL79J;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -263,7 +263,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y759RK5K7D;
+				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = NotificationBadgeExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
@@ -276,7 +276,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y759RK5K7D;
+				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = NotificationBadgeExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
