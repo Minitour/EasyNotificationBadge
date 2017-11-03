@@ -1,7 +1,4 @@
-# EasyNotificationBadge
-UIView extension that adds a notification badge.
 
-## Screenshots
 <img src="Screenshots/heading.gif"  height="100" />
 
 ## Installation
