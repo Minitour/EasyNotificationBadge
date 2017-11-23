@@ -10,9 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var badgeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.badgeButton.badge(text: "1")
         }

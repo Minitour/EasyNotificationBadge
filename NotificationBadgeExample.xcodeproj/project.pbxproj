@@ -12,7 +12,7 @@
 		4F6C9B431D5C641D000098B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B411D5C641D000098B8 /* Main.storyboard */; };
 		4F6C9B451D5C641D000098B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B441D5C641D000098B8 /* Assets.xcassets */; };
 		4F6C9B481D5C641D000098B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B461D5C641D000098B8 /* LaunchScreen.storyboard */; };
-		4F6C9B561D5C77BD000098B8 /* NSBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6C9B551D5C77BD000098B8 /* NSBadge.swift */; };
+		9DFF11591FC6E9C30011551A /* EasyNotificationBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		4F6C9B441D5C641D000098B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F6C9B471D5C641D000098B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F6C9B491D5C641D000098B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F6C9B551D5C77BD000098B8 /* NSBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBadge.swift; sourceTree = SOURCE_ROOT; };
+		9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyNotificationBadge.swift; path = Sources/EasyNotificationBadge.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		4F6C9B3C1D5C641D000098B8 /* NotificationBadgeExample */ = {
 			isa = PBXGroup;
 			children = (
-				4F6C9B551D5C77BD000098B8 /* NSBadge.swift */,
+				9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */,
 				4F6C9B3D1D5C641D000098B8 /* AppDelegate.swift */,
 				4F6C9B3F1D5C641D000098B8 /* ViewController.swift */,
 				4F6C9B411D5C641D000098B8 /* Main.storyboard */,
@@ -142,7 +142,7 @@
 			files = (
 				4F6C9B401D5C641D000098B8 /* ViewController.swift in Sources */,
 				4F6C9B3E1D5C641D000098B8 /* AppDelegate.swift in Sources */,
-				4F6C9B561D5C77BD000098B8 /* NSBadge.swift in Sources */,
+				9DFF11591FC6E9C30011551A /* EasyNotificationBadge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

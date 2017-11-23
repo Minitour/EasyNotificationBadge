@@ -1,5 +1,5 @@
 //
-//  NSBadge.swift
+//  EasyNotificationBadge.swift
 //
 //  Created by Antonio Zaitoun on 8/10/16.
 //  Copyright © 2016 Crofis. All rights reserved.
@@ -190,51 +190,32 @@ extension UIBarButtonItem {
     /*
      * Assign badge with only text.
      */
-    @objc public func badge(text badgeText: String!) {
-        if let view = getView() {
-            view.badge(text: badgeText, appearance: BadgeAppearance())
+    @objc public func badge(text: String?) {
+        badge(text: text, appearance: BadgeAppearance())
+    }
+    
+    public func badge(text badgeText: String?, appearance: BadgeAppearance = BadgeAppearance()) {
+        if let view = badgeViewHolder {
+            getView(in: view).badge(text: badgeText, appearance: appearance)
         } else {
             NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
         }
     }
 
-    public func badge(text badgeText: String!, appearance: BadgeAppearance) {
-        if let view = getView() {
-            view.badge(text: badgeText, appearance: appearance)
-        } else {
-            NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
-        }
-    }
-
-    /*
-     * Assign badge with text and edge insets.
-     */
-    @available(*, deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
-    @objc public func badge(text badgeText: String!, badgeEdgeInsets: UIEdgeInsets) {
-        if let view = getView() {
-            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
-        } else {
-            NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
-        }
-
-    }
-
-    /*
-     * Assign badge with text,insets, and appearance.
-     */
-    @available(*, deprecated, message: "Use badge(text: String!, appearance:BadgeAppearance)")
-    public func badge(text badgeText: String!, badgeEdgeInsets: UIEdgeInsets!, appearance: BadgeAppearance) {
-        if let view = getView() {
-            view.badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: appearance)
-        } else {
-            NSLog("Attempted setting badge with value '\(badgeText ?? "nil")' on a nil UIBarButtonItem view.")
-        }
-    }
-
-    private func getView() -> UIView? {
+    private var badgeViewHolder: UIView? {
         return value(forKey: "view") as? UIView
     }
+    
+    private func getView(in holder: UIView)->UIView{
+        for sub in holder.subviews {
+            if "\(type(of: sub))" == "_UIModernBarButton" {
+                return sub
+            }
+        }
+        return holder
+    }
 
+    
 }
 
 /*
