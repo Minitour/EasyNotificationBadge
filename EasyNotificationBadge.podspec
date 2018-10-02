@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "EasyNotificationBadge"
-  s.version      = "1.1.3"
+  s.version      = "1.2.0"
   s.summary      = "UIView extension that adds a notification badge."
   s.homepage     = "https://github.com/Minitour/EasyNotificationBadge"
   s.license      = "MIT"
