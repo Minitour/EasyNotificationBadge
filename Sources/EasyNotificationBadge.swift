@@ -46,7 +46,7 @@ extension UIView {
         //Find badge in subviews if exists
         for view in self.subviews {
             if view.tag == 1 && view is BadgeLabel {
-                badgeLabel = view as! BadgeLabel
+                badgeLabel = (view as! BadgeLabel)
             }
         }
 
