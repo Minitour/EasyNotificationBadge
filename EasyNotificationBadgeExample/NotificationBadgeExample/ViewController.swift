@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyNotificationBadge
 
 class ViewController: UIViewController {
     @IBOutlet weak var badgeButton: UIButton!
