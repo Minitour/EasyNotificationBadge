@@ -102,6 +102,7 @@
 					4F6C9B391D5C641D000098B8 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 35DWKWL79J;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -117,7 +118,7 @@
 			);
 			mainGroup = 4F6C9B311D5C641D000098B8;
 			packageReferences = (
-				CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "EasyNotificationBadge" */,
+				CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */,
 			);
 			productRefGroup = 4F6C9B3B1D5C641D000098B8 /* Products */;
 			projectDirPath = "";
@@ -277,7 +278,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -293,7 +294,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -321,9 +322,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "EasyNotificationBadge" */ = {
+		CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "../";
+			repositoryURL = ../;
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.2.0;
@@ -334,7 +335,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		CF778DE025383FDC00D71C25 /* EasyNotificationBadge */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "EasyNotificationBadge" */;
+			package = CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */;
 			productName = EasyNotificationBadge;
 		};
 /* End XCSwiftPackageProductDependency section */
