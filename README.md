@@ -7,10 +7,28 @@
 
 ## Installation
 
+### CocoaPods
 
 ```bash
 pod 'EasyNotificationBadge'
 ```
+
+### Swift Package Manager
+
+You can use [The Swift Package Manager](https://swift.org/package-manager) to install `EasyNotificationBadge` by adding the proper description to your `Package.swift` file:
+
+```swift
+// swift-tools-version:4.0
+import PackageDescription
+
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    dependencies: [
+        .package(url: "https://github.com/Minitour/EasyNotificationBadge.git", from: "1.2.0"),
+    ]
+)
+```
+Then run `swift build` whenever you're ready.
 
 Or simply drag and drop ```NSBadge.swift``` to your project.
 

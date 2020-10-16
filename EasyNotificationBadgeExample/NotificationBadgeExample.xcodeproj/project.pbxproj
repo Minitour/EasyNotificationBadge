@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,7 @@
 		4F6C9B431D5C641D000098B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B411D5C641D000098B8 /* Main.storyboard */; };
 		4F6C9B451D5C641D000098B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B441D5C641D000098B8 /* Assets.xcassets */; };
 		4F6C9B481D5C641D000098B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F6C9B461D5C641D000098B8 /* LaunchScreen.storyboard */; };
-		9DFF11591FC6E9C30011551A /* EasyNotificationBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */; };
+		CF778DE125383FDC00D71C25 /* EasyNotificationBadge in Frameworks */ = {isa = PBXBuildFile; productRef = CF778DE025383FDC00D71C25 /* EasyNotificationBadge */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,6 @@
 		4F6C9B441D5C641D000098B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F6C9B471D5C641D000098B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F6C9B491D5C641D000098B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasyNotificationBadge.swift; path = Sources/EasyNotificationBadge.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF778DE125383FDC00D71C25 /* EasyNotificationBadge in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +56,6 @@
 		4F6C9B3C1D5C641D000098B8 /* NotificationBadgeExample */ = {
 			isa = PBXGroup;
 			children = (
-				9DFF11581FC6E9C30011551A /* EasyNotificationBadge.swift */,
 				4F6C9B3D1D5C641D000098B8 /* AppDelegate.swift */,
 				4F6C9B3F1D5C641D000098B8 /* ViewController.swift */,
 				4F6C9B411D5C641D000098B8 /* Main.storyboard */,
@@ -83,6 +82,9 @@
 			dependencies = (
 			);
 			name = NotificationBadgeExample;
+			packageProductDependencies = (
+				CF778DE025383FDC00D71C25 /* EasyNotificationBadge */,
+			);
 			productName = NotificationBadgeExample;
 			productReference = 4F6C9B3A1D5C641D000098B8 /* NotificationBadgeExample.app */;
 			productType = "com.apple.product-type.application";
@@ -100,6 +102,7 @@
 					4F6C9B391D5C641D000098B8 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 35DWKWL79J;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -109,10 +112,14 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = 4F6C9B311D5C641D000098B8;
+			packageReferences = (
+				CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */,
+			);
 			productRefGroup = 4F6C9B3B1D5C641D000098B8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -142,7 +149,6 @@
 			files = (
 				4F6C9B401D5C641D000098B8 /* ViewController.swift in Sources */,
 				4F6C9B3E1D5C641D000098B8 /* AppDelegate.swift in Sources */,
-				9DFF11591FC6E9C30011551A /* EasyNotificationBadge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +260,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -265,10 +272,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = NotificationBadgeExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -278,10 +288,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 35DWKWL79J;
 				INFOPLIST_FILE = NotificationBadgeExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crofis.NotificationBadgeExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -307,6 +320,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = ../;
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF778DE025383FDC00D71C25 /* EasyNotificationBadge */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF778DDF25383FDC00D71C25 /* XCRemoteSwiftPackageReference "." */;
+			productName = EasyNotificationBadge;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4F6C9B321D5C641D000098B8 /* Project object */;
 }
