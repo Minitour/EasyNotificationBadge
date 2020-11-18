@@ -24,7 +24,7 @@ import PackageDescription
 let package = Package(
     name: "YOUR_PROJECT_NAME",
     dependencies: [
-        .package(url: "https://github.com/Minitour/EasyNotificationBadge.git", from: "1.2.1"),
+        .package(url: "https://github.com/Minitour/EasyNotificationBadge.git", from: "1.2.2"),
     ]
 )
 ```
