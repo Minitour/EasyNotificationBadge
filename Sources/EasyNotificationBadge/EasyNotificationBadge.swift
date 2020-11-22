@@ -31,7 +31,7 @@ extension UIView {
     /// Assign badge with text,insets, and appearance.
     public func badge(text badgeText: String?, badgeEdgeInsets: UIEdgeInsets?, appearance: BadgeAppearance) {
         // Create badge label
-        var badgeLabel: BadgeLabel!
+        var badgeLabel: BadgeLabel?
         var doesBadgeExist = false
 
         // Find badge in subviews if exists
@@ -43,13 +43,13 @@ extension UIView {
         if badgeText == nil && badgeLabel != nil {
             if appearance.animate {
                 UIView.animate(withDuration: appearance.duration, animations: {
-                    badgeLabel.alpha = 0.0
-                    badgeLabel.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    badgeLabel?.alpha = 0.0
+                    badgeLabel?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 }, completion: { (_) in
-                    badgeLabel.removeFromSuperview()
+                    badgeLabel?.removeFromSuperview()
                 })
             } else {
-                badgeLabel.removeFromSuperview()
+                badgeLabel?.removeFromSuperview()
             }
 
             return
@@ -62,39 +62,42 @@ extension UIView {
             // init badge label variable
             badgeLabel = BadgeLabel()
             // assign tag to badge label
-            badgeLabel.tag = 1
+            badgeLabel?.tag = 1
         } else {
             doesBadgeExist = true
         }
 
-        let oldWidth: CGFloat? = doesBadgeExist ? badgeLabel.frame.width : nil
+        let oldWidth: CGFloat? = doesBadgeExist ? badgeLabel?.frame.width : nil
 
         // Set the text on the badge label
-        badgeLabel.text = badgeText
+        badgeLabel?.text = badgeText
         // Set font size
-        badgeLabel.font = appearance.font
-        badgeLabel.sizeToFit()
+        badgeLabel?.font = appearance.font
+        badgeLabel?.sizeToFit()
 
         // set the allignment
-        badgeLabel.textAlignment = appearance.textAlignment
+        badgeLabel?.textAlignment = appearance.textAlignment
         // set background color
-        badgeLabel.layer.backgroundColor = appearance.backgroundColor.cgColor
+        badgeLabel?.layer.backgroundColor = appearance.backgroundColor.cgColor
         // set text color
-        badgeLabel.textColor = appearance.textColor
+        badgeLabel?.textColor = appearance.textColor
 
         // get current badge size
-        let badgeSize = badgeLabel.frame.size
+        let badgeSize = badgeLabel?.frame.size
         // calculate width and height with minimum height and width of 20
-        let height = max(18, Double(badgeSize.height) + 5.0)
-        let width = max(height, Double(badgeSize.width) + 10.0)
-        badgeLabel.frame.size = CGSize(width: width, height: height)
+        let height = max(18, (badgeSize?.height ?? 0.0) + 5.0)
+        let width = max(height, (badgeSize?.width ?? 0.0) + 10.0)
+        badgeLabel?.frame.size = CGSize(width: width, height: height)
 
         // add to subview
         if doesBadgeExist {
             // remove view to delete constraints
-            badgeLabel.removeFromSuperview()
+            badgeLabel?.removeFromSuperview()
         }
-        self.addSubview(badgeLabel)
+
+        if let badgeLabel = badgeLabel {
+            self.addSubview(badgeLabel)
+        }
 
         // The distance from the center of the view (vertically)
         let centerY = appearance.distanceFromCenterY == 0 ? -(bounds.size.height / 2) : appearance.distanceFromCenterY
@@ -102,7 +105,7 @@ extension UIView {
         let centerX = appearance.distanceFromCenterX == 0 ? (bounds.size.width / 2) : appearance.distanceFromCenterX
 
         // disable auto resizing mask
-        badgeLabel.translatesAutoresizingMaskIntoConstraints = false
+        badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
 
         // add height constraint
         addConstraints([
@@ -140,24 +143,26 @@ extension UIView {
                                constant: centerY)
         ])
 
-        badgeLabel.layer.borderColor = appearance.borderColor.cgColor
-        badgeLabel.layer.borderWidth = appearance.borderWidth
+        badgeLabel?.layer.borderColor = appearance.borderColor.cgColor
+        badgeLabel?.layer.borderWidth = appearance.borderWidth
+
+        let badgeLabelHeight = badgeLabel?.frame.size.height ?? 0.0
         // corner radius
-        badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height / 2
+        badgeLabel?.layer.cornerRadius = badgeLabelHeight / 2
 
         // setup shadow
         if appearance.allowShadow {
-            badgeLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-            badgeLabel.layer.shadowRadius = 1
-            badgeLabel.layer.shadowOpacity = 0.5
-            badgeLabel.layer.shadowColor = UIColor.black.cgColor
+            badgeLabel?.layer.shadowOffset = CGSize(width: 1, height: 1)
+            badgeLabel?.layer.shadowRadius = 1
+            badgeLabel?.layer.shadowOpacity = 0.5
+            badgeLabel?.layer.shadowColor = UIColor.black.cgColor
         }
 
         // badge does not exist, meaning we are adding a new one
         if !doesBadgeExist {
             // should it animate?
             if appearance.animate {
-                badgeLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
+                badgeLabel?.transform = CGAffineTransform(scaleX: 0, y: 0)
 
                 UIView.animate(withDuration: appearance.duration,
                                delay: 0,
@@ -165,16 +170,16 @@ extension UIView {
                                initialSpringVelocity: 0.5,
                                options: [],
                                animations: {
-                                badgeLabel.transform = .identity
+                                badgeLabel?.transform = .identity
                                },
                                completion: nil)
             }
         } else {
             if appearance.animate, let oldWidth = oldWidth {
-                let currentWidth = badgeLabel.frame.width
-                badgeLabel.frame.size.width = oldWidth
+                let currentWidth = badgeLabel?.frame.width ?? 0.0
+                badgeLabel?.frame.size.width = oldWidth
                 UIView.animate(withDuration: appearance.duration) {
-                    badgeLabel.frame.size.width = currentWidth
+                    badgeLabel?.frame.size.width = currentWidth
                 }
             }
         }
