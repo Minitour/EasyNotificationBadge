@@ -83,10 +83,14 @@ extension UIView {
         badgeLabel?.textColor = appearance.textColor
 
         // get current badge size
-        let badgeSize = badgeLabel?.frame.size
         // calculate width and height with minimum height and width of 20
-        let height = max(18, (badgeSize?.height ?? 0.0) + 5.0)
-        let width = max(height, (badgeSize?.width ?? 0.0) + 10.0)
+        let badgeSize = badgeLabel?.frame.size
+        var height = max(18, (badgeSize?.height ?? 0.0) + 5.0)
+        var width = max(height, (badgeSize?.width ?? 0.0) + 10.0)
+        if let radius = appearance.radius {
+            height = radius
+            width = radius
+        }
         badgeLabel?.frame.size = CGSize(width: width, height: height)
 
         // add to subview
@@ -229,6 +233,7 @@ public struct BadgeAppearance {
     public var duration: TimeInterval
     public var distanceFromCenterY: CGFloat
     public var distanceFromCenterX: CGFloat
+    public var radius: CGFloat?
 
     public init() {
         font = .systemFont(ofSize: 12)
