@@ -233,7 +233,7 @@ public struct BadgeAppearance {
     public var duration: TimeInterval
     public var distanceFromCenterY: CGFloat
     public var distanceFromCenterX: CGFloat
-    public var radius: CGFloat
+    public var radius: CGFloat?
 
     public init() {
         font = .systemFont(ofSize: 12)
