@@ -11,12 +11,14 @@ import EasyNotificationBadge
 
 class ViewController: UIViewController {
     @IBOutlet weak var badgeButton: UIButton!
+
+    var appearance = BadgeAppearance(animate: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.badgeButton.badge(text: "1")
+        DispatchQueue.main.asyncAfter(deadline: when) { [self] in
+            self.badgeButton.badge(text: "1", appearance: appearance)
         }
 
         badgeButton.addTarget(self, action: #selector(didSelectButton(sender:)), for: .touchUpInside)
@@ -24,30 +26,15 @@ class ViewController: UIViewController {
 
     @objc
     func didSelectButton(sender: UIButton) {
-
-        sender.badge(text: "Easy")
-//        let rndStr = String.random()
-//        let str: String? = rndStr.characters.count == 0 ? nil : rndStr
-//        sender.badge(text: str)
-    }
-}
-
-extension String {
-
-
-    static func random(withLengthUpTo maxLength: Int = 10)-> String{
-        let len = Int(arc4random_uniform(UInt32(maxLength)))
-        return random(length: len)
-    }
-
-    static func random(length: Int) -> String {
-        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var randomString: String = ""
-
-        for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.count))
-            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+        defer {
+            sender.tag += 1
         }
-        return randomString
+        if sender.tag == 0 {
+            sender.badge(text: "Easy", appearance: appearance)
+        } else if sender.tag == 1 {
+            sender.badge(text: nil, appearance: appearance)
+        } else {
+            sender.badge(text: "\(sender.tag - 1)", appearance: appearance)
+        }
     }
 }

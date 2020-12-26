@@ -15,21 +15,12 @@ extension UIView {
         badge(text: badgeText, appearance: BadgeAppearance())
     }
 
+
+    /// Assign badge with text,insets, and appearance.
     /// - Parameters:
     ///     - text: The badge value, use nil to remove exsiting badge.
     ///     - appearance: The appearance of the badge.
     public func badge(text badgeText: String?, appearance: BadgeAppearance) {
-        badge(text: badgeText, badgeEdgeInsets: nil, appearance: appearance)
-    }
-
-    /// Assign badge with text and edge insets.
-    @available(*, deprecated, message: "Use badge(text: String?, appearance: BadgeAppearance)")
-    @objc public func badge(text badgeText: String?, badgeEdgeInsets: UIEdgeInsets) {
-        badge(text: badgeText, badgeEdgeInsets: badgeEdgeInsets, appearance: BadgeAppearance())
-    }
-
-    /// Assign badge with text,insets, and appearance.
-    public func badge(text badgeText: String?, badgeEdgeInsets: UIEdgeInsets?, appearance: BadgeAppearance) {
         // Create badge label
         var badgeLabel: BadgeLabel?
         var doesBadgeExist = false
@@ -41,17 +32,7 @@ extension UIView {
 
         // If assigned text is nil (request to remove badge) and badge label is not nil:
         if badgeText == nil && badgeLabel != nil {
-            if appearance.animate {
-                UIView.animate(withDuration: appearance.duration, animations: {
-                    badgeLabel?.alpha = 0.0
-                    badgeLabel?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                }, completion: { (_) in
-                    badgeLabel?.removeFromSuperview()
-                })
-            } else {
-                badgeLabel?.removeFromSuperview()
-            }
-
+            removeBadgeLabel(badgeLabel!, appearance: appearance)
             return
         } else if badgeText == nil && badgeLabel == nil {
             return
@@ -67,106 +48,104 @@ extension UIView {
             doesBadgeExist = true
         }
 
-        let oldWidth: CGFloat? = doesBadgeExist ? badgeLabel?.frame.width : nil
+        guard let badgeLabelView = badgeLabel else { return }
+
+        let oldWidth: CGFloat? = doesBadgeExist ? badgeLabelView.frame.width : nil
 
         // Set the text on the badge label
-        badgeLabel?.text = badgeText
+        badgeLabelView.text = badgeText
         // Set font size
-        badgeLabel?.font = appearance.font
-        badgeLabel?.sizeToFit()
+        badgeLabelView.font = appearance.font
+        badgeLabelView.sizeToFit()
 
-        // set the allignment
-        badgeLabel?.textAlignment = appearance.textAlignment
-        // set background color
-        badgeLabel?.layer.backgroundColor = appearance.backgroundColor.cgColor
-        // set text color
-        badgeLabel?.textColor = appearance.textColor
+        layoutLabel(badgeLabelView, appearance: appearance, doesBadgeExist: doesBadgeExist)
 
+        applyStyle(label: badgeLabelView, appearance: appearance)
+
+        // badge does not exist, meaning we are adding a new one
+        animateBadgeAppearance(label: badgeLabelView, appearance: appearance, doesBadgeExist: doesBadgeExist, oldWidth: oldWidth)
+    }
+
+    fileprivate func layoutLabel(_ label: BadgeLabel, appearance:  BadgeAppearance, doesBadgeExist: Bool) {
         // get current badge size
         // calculate width and height with minimum height and width of 20
-        let badgeSize = badgeLabel?.frame.size
-        var height = max(18, (badgeSize?.height ?? 0.0) + 5.0)
-        var width = max(height, (badgeSize?.width ?? 0.0) + 10.0)
+        let badgeSize = label.frame.size
+        var height = max(18, (badgeSize.height) + 5.0)
+        var width = max(height, (badgeSize.width) + 10.0)
         if let radius = appearance.radius {
             height = radius
             width = radius
         }
-        badgeLabel?.frame.size = CGSize(width: width, height: height)
+        label.frame.size = CGSize(width: width, height: height)
 
         // add to subview
         if doesBadgeExist {
-            // remove view to delete constraints
-            badgeLabel?.removeFromSuperview()
-        }
-
-        if let badgeLabel = badgeLabel {
-            self.addSubview(badgeLabel)
+            // delete constraints
+            NSLayoutConstraint.deactivate(label.constraints)
+        } else {
+            addSubview(label)
+            // disable auto resizing mask
+            label.translatesAutoresizingMaskIntoConstraints = false
         }
 
         // The distance from the center of the view (vertically)
-        let centerY = appearance.distanceFromCenterY == 0 ? -(bounds.size.height / 2) : appearance.distanceFromCenterY
+        let centerY = appearance.distanceFromCenterY == nil ? -(bounds.size.height / 2) : appearance.distanceFromCenterY!
         // The distance from the center of the view (horizontally)
-        let centerX = appearance.distanceFromCenterX == 0 ? (bounds.size.width / 2) : appearance.distanceFromCenterX
+        let centerX = appearance.distanceFromCenterX == nil ? (bounds.size.width / 2) : appearance.distanceFromCenterX!
 
-        // disable auto resizing mask
-        badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
-
-        // add height constraint
-        addConstraints([
-            // add height constraint
-            NSLayoutConstraint(item: badgeLabel as Any,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1.0,
-                               constant: CGFloat(height)),
-            // add width constraint
-            NSLayoutConstraint(item: badgeLabel as Any,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .notAnAttribute,
-                               multiplier: 1.0,
-                               constant: CGFloat(width)),
-            // add vertical constraint
-            NSLayoutConstraint(item: badgeLabel as Any,
-                               attribute: .centerX,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .centerX,
-                               multiplier: 1.0,
-                               constant: centerX),
-            // add horizontal constraint
-            NSLayoutConstraint(item: badgeLabel as Any,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .centerY,
-                               multiplier: 1.0,
-                               constant: centerY)
+        // add constraints
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(equalToConstant: height),
+            label.widthAnchor.constraint(equalToConstant: width),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor, constant: centerX),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: centerY)
         ])
+    }
 
-        badgeLabel?.layer.borderColor = appearance.borderColor.cgColor
-        badgeLabel?.layer.borderWidth = appearance.borderWidth
+    fileprivate func applyStyle(label: BadgeLabel, appearance: BadgeAppearance) {
 
-        let badgeLabelHeight = badgeLabel?.frame.size.height ?? 0.0
+        // set the allignment
+        label.textAlignment = appearance.textAlignment
+        // set background color
+        label.layer.backgroundColor = appearance.backgroundColor.cgColor
+        // set text color
+        label.textColor = appearance.textColor
+
+        label.layer.borderColor = appearance.borderColor.cgColor
+        label.layer.borderWidth = appearance.borderWidth
+
+        let badgeLabelHeight = label.frame.size.height
         // corner radius
-        badgeLabel?.layer.cornerRadius = badgeLabelHeight / 2
+        label.layer.cornerRadius = badgeLabelHeight / 2
 
         // setup shadow
         if appearance.allowShadow {
-            badgeLabel?.layer.shadowOffset = CGSize(width: 1, height: 1)
-            badgeLabel?.layer.shadowRadius = 1
-            badgeLabel?.layer.shadowOpacity = 0.5
-            badgeLabel?.layer.shadowColor = UIColor.black.cgColor
+            label.layer.shadowOffset = CGSize(width: 1, height: 1)
+            label.layer.shadowRadius = 1
+            label.layer.shadowOpacity = 0.5
+            label.layer.shadowColor = UIColor.black.cgColor
+        }
+    }
+
+    fileprivate func removeBadgeLabel(_ label: BadgeLabel, appearance: BadgeAppearance) {
+        if appearance.animate {
+            UIView.animate(withDuration: appearance.duration, animations: {
+                label.alpha = 0.0
+                label.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }, completion: { (_) in
+                label.removeFromSuperview()
+            })
+        } else {
+            label.removeFromSuperview()
         }
 
-        // badge does not exist, meaning we are adding a new one
+    }
+
+    fileprivate func animateBadgeAppearance(label: BadgeLabel, appearance: BadgeAppearance, doesBadgeExist: Bool, oldWidth: CGFloat?) {
         if !doesBadgeExist {
             // should it animate?
             if appearance.animate {
-                badgeLabel?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                label.transform = CGAffineTransform(scaleX: 0, y: 0)
 
                 UIView.animate(withDuration: appearance.duration,
                                delay: 0,
@@ -174,16 +153,16 @@ extension UIView {
                                initialSpringVelocity: 0.5,
                                options: [],
                                animations: {
-                                badgeLabel?.transform = .identity
+                                label.transform = .identity
                                },
                                completion: nil)
             }
         } else {
             if appearance.animate, let oldWidth = oldWidth {
-                let currentWidth = badgeLabel?.frame.width ?? 0.0
-                badgeLabel?.frame.size.width = oldWidth
+                let currentWidth = label.frame.width
+                label.frame.size.width = oldWidth
                 UIView.animate(withDuration: appearance.duration) {
-                    badgeLabel?.frame.size.width = currentWidth
+                    label.frame.size.width = currentWidth
                 }
             }
         }
@@ -196,7 +175,7 @@ extension UIBarButtonItem {
         badge(text: text, appearance: BadgeAppearance())
     }
 
-    public func badge(text badgeText: String?, appearance: BadgeAppearance = BadgeAppearance()) {
+    public func badge(text badgeText: String?, appearance: BadgeAppearance = .default) {
         if let view = badgeViewHolder {
             getView(in: view).badge(text: badgeText, appearance: appearance)
         } else {
@@ -218,34 +197,58 @@ extension UIBarButtonItem {
 }
 
 /// BadgeLabel - This class is made to avoid confusion with other subviews that might be of type UILabel.
-@objc class BadgeLabel: UILabel {}
+@objc class BadgeLabel: UILabel {
+
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        NSLayoutConstraint.deactivate(constraints)
+    }
+}
 
 /// BadgeAppearance - This struct is used to design the badge.
 public struct BadgeAppearance {
-    public var font: UIFont
-    public var textAlignment: NSTextAlignment
-    public var borderColor: UIColor
-    public var borderWidth: CGFloat
-    public var allowShadow: Bool
-    public var backgroundColor: UIColor
-    public var textColor: UIColor
-    public var animate: Bool
-    public var duration: TimeInterval
-    public var distanceFromCenterY: CGFloat
-    public var distanceFromCenterX: CGFloat
+
+    public static var `default`: BadgeAppearance {
+        return .init()
+    }
+
+    public var font: UIFont = .systemFont(ofSize: 12)
+    public var textAlignment: NSTextAlignment = .center
+    public var borderColor: UIColor = .clear
+    public var borderWidth: CGFloat = 0.0
+    public var allowShadow: Bool = false
+    public var backgroundColor: UIColor = .red
+    public var textColor: UIColor = .white
+    public var animate: Bool = true
+    public var duration: TimeInterval = 0.2
+    public var distanceFromCenterY: CGFloat?
+    public var distanceFromCenterX: CGFloat?
     public var radius: CGFloat?
 
-    public init() {
-        font = .systemFont(ofSize: 12)
-        textAlignment = .center
-        backgroundColor = .red
-        textColor = .white
-        animate = true
-        duration = 0.2
-        borderColor = .clear
-        borderWidth = 0
-        allowShadow = false
-        distanceFromCenterY = 0
-        distanceFromCenterX = 0
+
+    public init(font: UIFont = .systemFont(ofSize: 12),
+                textAlignment: NSTextAlignment = .center,
+                borderColor: UIColor = .clear,
+                borderWidth: CGFloat = 0.0,
+                allowShadow: Bool = false,
+                backgroundColor: UIColor = .red,
+                textColor: UIColor = .white,
+                animate: Bool = true,
+                duration: TimeInterval = 0.2,
+                distanceFromCenterY: CGFloat? = nil,
+                distanceFromCenterX: CGFloat? = nil,
+                radius: CGFloat? = nil) {
+        self.font = font
+        self.textAlignment = textAlignment
+        self.borderColor = borderColor
+        self.borderWidth = borderWidth
+        self.allowShadow = allowShadow
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.animate = animate
+        self.duration = duration
+        self.distanceFromCenterY = distanceFromCenterY
+        self.distanceFromCenterX = distanceFromCenterX
+        self.radius = radius
     }
 }
