@@ -247,6 +247,5 @@ public struct BadgeAppearance {
         allowShadow = false
         distanceFromCenterY = 0
         distanceFromCenterX = 0
-        radius = 0
     }
 }
