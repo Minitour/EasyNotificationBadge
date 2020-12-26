@@ -87,9 +87,9 @@ extension UIView {
         let badgeSize = badgeLabel?.frame.size
         var height = max(18, (badgeSize?.height ?? 0.0) + 5.0)
         var width = max(height, (badgeSize?.width ?? 0.0) + 10.0)
-        if appearance.radius > 0 {
-            height = appearance.radius
-            width = appearance.radius
+        if let radius = appearance.radius {
+            height = radius
+            width = radius
         }
         badgeLabel?.frame.size = CGSize(width: width, height: height)
 
